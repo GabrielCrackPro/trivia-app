@@ -4,43 +4,11 @@
   box-sizing: border-box;
   font-family: sans-serif;
   font-size: 20px;
-}
-.menu {
-  padding: 15px;
-  background: rgb(87, 87, 87);
-}
-.menu li {
-  display: inline-block;
-}
-.menu li a {
-  text-decoration: none;
-  color: #fff;
-  margin-left: 20px;
+  overflow: hidden;
 }
 img {
-  position: absolute;
   width: 40px;
   height: 40px;
   top: 5px;
   left: 5px;
-}
-.question,
-.options {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 10px;
-}
-#question-category {
-  margin-top: 5px;
-  font-style: 10px;
-  text-decoration: underline;
-}
-button {
-  margin-bottom: 10px;
-  padding: 5px;
-  border: 1px solid #000;
-  border-radius: 25px;
-  background: none;
 }
