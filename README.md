@@ -2,11 +2,14 @@
 
 A aplication to play trivial
 
-- Question are from <a href="https://opentdb.com/api_config.php" target="blank">here</a>
+- Questions are from <a href="https://opentdb.com/api_config.php" target="blank">here</a>
 
 ## TODO
 
-- [ ] Refactor color selection
-- [ ] Add next button
-- [ ] Add points/leaderboard
+- [x] Add next button/action
+- [x] Add points/leaderboard
+- [ ] Add animations when click/correcting/failing
+- [ ] Add socket.io support
+- [ ] Add responsive design
+- [ ] Debug
 - [ ] Deploy
