@@ -1,6 +1,7 @@
 const API_URL = 'https://opentdb.com/api.php?amount=10'
 const questionContainer = document.querySelector('.question')
 let randomIndex = Math.floor(Math.random() * 10) //Get a random question based on index
+let totalPoints = 0
 
 function fetchQuestions() {
     let questions = fetch(API_URL)
@@ -11,10 +12,12 @@ const getQuestions = async () => {
     const q = await fetchQuestions()
     questionContainer.innerHTML += `
     <p id='question-text'>${JSON.stringify(q.results[randomIndex].question)}</p>
+    <p id='question-category'>${JSON.stringify(q.results[randomIndex].category)}</p>
+    <p id='total-points'>You have ${totalPoints} points</p>
     <div class='options'>
     <button>${q.results[randomIndex].correct_answer}</button>
     </div>
-    ` //Crreate correct answer button
+    ` //Create correct answer button
     const optionsContainer = document.querySelector('.options')
     for (let i = 0; i < q.results[randomIndex].incorrect_answers.length; i++) {
         optionsContainer.innerHTML += `
@@ -73,15 +76,29 @@ const getQuestions = async () => {
     } else if (q.results[randomIndex].category.includes(questionsCategories[7])) {
         questionContainer.style.backgroundColor = questionColors[7]
         questionContainer.style.color = '#fff'
+    } else if (q.results[randomIndex].category.includes(questionsCategories[8])) {
+        questionContainer.style.backgroundColor = questionColors[8]
+        questionContainer.style.color = '#fff'
     }
     //Verify the answers
     optionsButtons.forEach(button => button.addEventListener('click', () => {
         if (button.textContent === q.results[randomIndex].correct_answer) {
             button.style.backgroundColor = 'green'
+            button.style.pointerEvents = 'none'
+            totalPoints += 1
+            setTimeout(() => {
+                questionContainer.innerHTML = ''
+                getQuestions()
+            }, 1000)
+            console.log(totalPoints)
         } else {
             button.style.backgroundColor = 'red'
             button.color = '#fff'
-            location.reload()
+            totalPoints = 0
+            setTimeout(() => {
+                questionContainer.innerHTML = ''
+                getQuestions()
+            }, 1000)
         }
     }))
 
@@ -89,5 +106,4 @@ const getQuestions = async () => {
 getQuestions()
 
 //TODO: REFACTOR COLOR SELECTION
-//TODO: ADD NEXT BUTTON
 //TODO: ADD POINTS/LEADERBOARDS
