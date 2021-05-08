@@ -12,14 +12,15 @@ function fetchQuestions() {
 const getQuestions = async () => {
     const q = await fetchQuestions()
     questionContainer.innerHTML += `
-    <i class="fs-1 fw-bold fas fa-question"></i>
-    <p id='question-text fw-bold'>${JSON.stringify(q.results[randomIndex].question)}</p>
-    <p id='question-category' class='mt-1 fs-6 text-decoration-underline'>${JSON.stringify(q.results[randomIndex].category)}</p>
+    <i class="fs-1 fw-bold fas fa-question" id="question-icon"></i>
+    <p id='question-text' class='text-align-center'>${JSON.stringify(q.results[randomIndex].question).slice(1, q.results[randomIndex].question.length)}</p>
+    <p id='question-category' class='mt-1 fs-6 text-decoration-underline text-align-center'>${JSON.stringify(q.results[randomIndex].category).slice(1, q.results[randomIndex].category.length + 1)}</p>
     <p id='total-points'>You have ${totalPoints} points</p>
     <div class='options'>
     <button class='shadow btn btn-dark btn-block mt-1 d-flex flex-column justify-content-center align-items-center vw-100'>${q.results[randomIndex].correct_answer}</button>
     </div>
     ` //Create correct answer button
+    const questionIcon = document.querySelector('#question-icon')
     const optionsContainer = document.querySelector('.options')
     for (let i = 0; i < q.results[randomIndex].incorrect_answers.length; i++) {
         optionsContainer.innerHTML += `
@@ -27,66 +28,69 @@ const getQuestions = async () => {
         `
     } //Create incorrect answers buttons
     const optionsButtons = document.querySelectorAll('.options button')
-    let questionsCategories = [
-        'General Knowledge',
-        'Entertainment',
-        'Science & Nature',
-        'Mythology',
-        'Sports',
-        'Geography',
-        'History',
-        'Politics',
-        'Art',
-        'Celebrities',
-        'Animals',
-        'Vehicles'
+    const questionInfo = [
+        {
+            'category': 'General Knowledge',
+            'color': '#040F16',
+            'icon': '<i class="far fa-lightbulb"></i>'
+        },
+        {
+            'category': 'Entertainment',
+            'color': '#AF125A',
+            'icon': '<i class="fas fa-tv"></i>'
+        },
+        {
+            'category': 'Science',
+            'color': '#8AC926',
+            'icon': '<i class="fas fa-flask"></i>'
+        },
+        {
+            'category': 'Mythology',
+            'color': '#37123C',
+            'icon': '<i class="fas fa-scroll"></i>'
+        },
+        {
+            'category': 'Sports',
+            'color': '#FB5012',
+            'icon': '<i class="fas fa-football-ball"></i>'
+        },
+        {
+            'category': 'Geography',
+            'color': '#0A369D',
+            'icon': '<i class="fas fa-globe-americas"></i>'
+        },
+        {
+            'category': 'History',
+            'color': '#E9DF00',
+            'icon': '<i class="fas fa-landmark"></i>'
+        },
+        {
+            'category': 'Politics',
+            'color': '#363537',
+            'icon': '<i class="fas fa-balance-scale"></i>'
+        },
+        {
+            'category': 'Celebrities',
+            'color': '#730071',
+            'icon': '<i class="fas fa-user"></i>'
+        },
+        {
+            'category': 'Animals',
+            'color': '#093824',
+            'icon': '<i class="fas fa-paw"></i>'
+        },
+        {
+            'category': 'Vehicles',
+            'color': '#F21B3F',
+            'icon': '<i class="fas fa-car"></i>'
+        }
     ]
-    let questionColors = [
-        '#040F16', //General Knowlege
-        '#AF125A', //Entertainment/Art
-        '8AC926', //Science
-        '#37123C', //Mitology
-        '#FB5012', //Sports
-        '#0A369D', //Geography
-        '#E9DF00', //History
-        '#363537', //Politics
-        '#730071', //Celebrities
-        '#093824',//Animals
-        '#F21B3F' //Vehicles
-    ]
-    if (q.results[randomIndex].category.includes(questionsCategories[0])) {
-        questionContainer.style.backgroundColor = questionColors[0]
-        questionContainer.style.color = '#ccc'
-    } else if (q.results[randomIndex].category.includes(questionsCategories[1])) {
-        questionContainer.style.backgroundColor = questionColors[1]
-        questionContainer.style.color = '#ccc'
-    } else if (q.results[randomIndex].category.includes(questionsCategories[2])) {
-        questionContainer.style.backgroundColor = questionColors[2]
-        questionContainer.style.color = '#ccc'
-    } else if (q.results[randomIndex].category.includes(questionsCategories[3])) {
-        questionContainer.style.backgroundColor = questionColors[3]
-        questionContainer.style.color = '#fff'
-    } else if (q.results[randomIndex].category.includes(questionsCategories[4])) {
-        questionContainer.style.backgroundColor = questionColors[4]
-        questionContainer.style.color = '#fff'
-    } else if (q.results[randomIndex].category.includes(questionsCategories[5])) {
-        questionContainer.style.backgroundColor = questionColors[5]
-        questionContainer.style.color = '#fff'
-    } else if (q.results[randomIndex].category.includes(questionsCategories[6])) {
-        questionContainer.style.backgroundColor = questionColors[6]
-        questionContainer.style.color = '#fff'
-    } else if (q.results[randomIndex].category.includes(questionsCategories[7])) {
-        questionContainer.style.backgroundColor = questionColors[7]
-        questionContainer.style.color = '#fff'
-    } else if (q.results[randomIndex].category.includes(questionsCategories[8])) {
-        questionContainer.style.backgroundColor = questionColors[8]
-        questionContainer.style.color = '#fff'
-    } else if (q.results[randomIndex].category.includes(questionsCategories[9])) {
-        questionContainer.style.backgroundColor = questionColors[9]
-        questionContainer.style.color = '#fff'
-    } else if (q.results[randomIndex].category.includes(questionsCategories[10])) {
-        questionContainer.style.backgroundColor = questionColors[10]
-        questionContainer.style.color = '#fff'
+    for (let i = 0; i <= 10; i++) {
+        if (q.results[randomIndex].category.includes(questionInfo[i].category)) {
+            questionContainer.style.backgroundColor = questionInfo[i].color
+            questionIcon.innerHTML = questionInfo[i].icon
+            questionContainer.style.color = '#fff'
+        }
     }
     //Verify the answers
     optionsButtons.forEach(button => button.addEventListener('click', () => {
@@ -105,7 +109,7 @@ const getQuestions = async () => {
             button.classList.remove('btn-dark')
             button.classList.add('btn-danger')
             button.color = '#fff'
-            totalPoints = 0
+            if (totalPoints != 0) totalPoints -= 1
             loadingSpinner.classList.remove('visually-hidden')
             setTimeout(() => {
                 questionContainer.innerHTML = ''
@@ -118,5 +122,4 @@ const getQuestions = async () => {
 }
 getQuestions()
 
-//TODO: REFACTOR COLOR SELECTION
 //TODO: ADD POINTS/LEADERBOARDS
