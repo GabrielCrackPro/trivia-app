@@ -10,6 +10,6 @@
 - [x] Add points/leaderboard
 - [x] Add responsive design
 - [x] Migrate design to Bootstrap 5
+- [x] Fix color selection
 - [ ] Add animations when click/correcting/failing
-- [ ] Debug
 - [x] Deploy
