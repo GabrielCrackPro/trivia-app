@@ -93,12 +93,15 @@ const getQuestions = async () => {
         }
     }
     //Verify the answers
+    const correctSound = new Audio('https://freesound.org/data/previews/476/476178_6101353-lq.mp3')
+    const wrongSound = new Audio('https://freesound.org/data/previews/476/476177_6101353-lq.mp3')
     optionsButtons.forEach(button => button.addEventListener('click', () => {
         if (button.textContent === q.results[randomIndex].correct_answer) {
             button.classList.remove('btn-dark')
             button.classList.add('btn-success')
             button.style.pointerEvents = 'none'
             totalPoints += 1
+            correctSound.play()
             loadingSpinner.classList.remove('visually-hidden')
             setTimeout(() => {
                 questionContainer.innerHTML = ''
@@ -110,6 +113,7 @@ const getQuestions = async () => {
             button.classList.add('btn-danger')
             button.color = '#fff'
             if (totalPoints != 0) totalPoints -= 1
+            wrongSound.play()
             loadingSpinner.classList.remove('visually-hidden')
             setTimeout(() => {
                 questionContainer.innerHTML = ''
