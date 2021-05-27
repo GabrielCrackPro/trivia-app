@@ -1,4 +1,9 @@
 const API_URL = 'https://opentdb.com/api.php?amount=10'
+//Souunds
+const correctSound = new Audio('https://freesound.org/data/previews/476/476178_6101353-lq.mp3')
+const wrongSound = new Audio('https://freesound.org/data/previews/476/476177_6101353-lq.mp3')
+const bombSound = new Audio('https://freesound.org/data/previews/521/521620_9148183-lq.mp3')
+
 const questionContainer = document.querySelector('.question')
 const loadingSpinner = document.querySelector('#spinner')
 let randomIndex = Math.floor(Math.random() * 10) //Get a random question based on index
@@ -13,12 +18,13 @@ const getQuestions = async () => {
     const q = await fetchQuestions()
     questionContainer.innerHTML += `
     <i class="fs-1 fw-bold fas fa-question" id="question-icon"></i>
-    <p id='question-text' class='text-align-center'>${JSON.stringify(q.results[randomIndex].question).slice(1, q.results[randomIndex].question.length)}</p>
+    <p id='question-text' class='text-center'>${JSON.stringify(q.results[randomIndex].question).slice(1, q.results[randomIndex].question.length)}</p>
     <p id='question-category' class='mt-1 fs-6 text-decoration-underline text-align-center'>${JSON.stringify(q.results[randomIndex].category).slice(1, q.results[randomIndex].category.length + 1)}</p>
     <p id='total-points'>You have ${totalPoints} points</p>
     <div class='options'>
     <button class='shadow btn btn-dark btn-block mt-1 d-flex flex-column justify-content-center align-items-center vw-100'>${q.results[randomIndex].correct_answer}</button>
     </div>
+    <div class="boosters mt-1"></div>
     ` //Create correct answer button
     const questionIcon = document.querySelector('#question-icon')
     const optionsContainer = document.querySelector('.options')
@@ -27,6 +33,19 @@ const getQuestions = async () => {
         <button class='shadow-lg btn btn-dark btn-block mt-1 d-flex flex-column justify-content-center align-items-center vw-100'>${q.results[randomIndex].incorrect_answers[i]}</button>
         `
     } //Create incorrect answers buttons
+    const boostersContainer = document.querySelector('.boosters')
+    boostersContainer.innerHTML = `
+    <button class="shadow-sm btn btn-dark text-center bomb-button"><i class="fas fa-bomb"></i> (2 points)</button>
+    <button class="shadow-sm btn btn-dark text-center skip-button"><i class="fas fa-forward"></i> (1 point)</button>
+    <button class="shadow-sm btn btn-dark text-center help-button"><i class="fas fa-question"></i></button>
+    <p class="info ml-1 text-center"></p>
+    `
+    const bombButton = document.querySelector('.bomb-button')
+    const skipButton = document.querySelector('.skip-button')
+    const helpButton = document.querySelector('.help-button')
+
+    const info = document.querySelector('.info')
+
     const optionsButtons = document.querySelectorAll('.options button')
     const questionInfo = [
         {
@@ -93,8 +112,6 @@ const getQuestions = async () => {
         }
     }
     //Verify the answers
-    const correctSound = new Audio('https://freesound.org/data/previews/476/476178_6101353-lq.mp3')
-    const wrongSound = new Audio('https://freesound.org/data/previews/476/476177_6101353-lq.mp3')
     optionsButtons.forEach(button => button.addEventListener('click', () => {
         if (button.textContent === q.results[randomIndex].correct_answer) {
             button.classList.remove('btn-dark')
@@ -122,6 +139,39 @@ const getQuestions = async () => {
             }, 1000)
         }
     }))
+    bombButton.addEventListener('click', () => {
+        optionsButtons.forEach(button => {
+            if (totalPoints >= 2) {
+                if (button.textContent != q.results[randomIndex].correct_answer) {
+                    totalPoints -= 2
+                    bombSound.play()
+                    button.classList.add('disabled')
+                }
+            } else {
+                info.textContent = 'You must have at least 2 points'
+            }
+        })
+    })
+    skipButton.addEventListener('click', () => {
+        if (totalPoints >= 1) {
+            totalPoints -= 1
+            location.reload()
+        }
+    })
+    //Create help menu
+    helpButton.addEventListener('click', () => {
+        const helpMenu = document.createElement('div')
+        helpMenu.classList.add('position-absolute', 'top-10', 'w-100', 'h-100')
+        helpMenu.style.backgroundColor = '#fff'
+        helpMenu.style.height = window.screen.height
+        helpMenu.style.width = window.screen.width
+        helpMenu.style.color = '#000'
+        const exitButton = document.createElement('button')
+        exitButton.textContent = 'X'
+        exitButton.classList.add('btn', 'btn-dark', 'mt-2', 'position-absolute', 'right-0')
+        helpMenu.appendChild(exitButton)
+        questionContainer.appendChild(helpMenu)
+    })
 
 }
 getQuestions()
