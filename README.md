@@ -6,6 +6,7 @@
 - Sounds
   - <a href="https://freesound.org/people/unadamlar/sounds/476178/" target="blank">Correct Answer</a>
   - <a href="https://freesound.org/people/Raclure/sounds/483598/" target ="blank">Wrong Answer</a>
+  - <a href="https://freesound.org/data/previews/521/521620_9148183-lq.mp3" target ="blank">Bomb Sound</a>
 
 ## TODO
 
@@ -15,5 +16,9 @@
 - [x] Migrate design to Bootstrap 5
 - [x] Fix color selection
 - [x] Add sounds when correcting/failing
+- [x] Add boosters
+  - [x] Bomb
+  - [x] Skip
 - [ ] Add animations when click/correcting/failing
+- [ ] Finish help menu
 - [x] Deploy
