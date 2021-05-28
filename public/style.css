@@ -4,11 +4,46 @@
   box-sizing: border-box;
   font-family: sans-serif;
   font-size: 20px;
-  overflow: hidden;
 }
 img {
   width: 40px;
   height: 40px;
   top: 5px;
   left: 5px;
+}
+.bg-gkn {
+  background: #040f16;
+}
+.bg-en {
+  background: #af125a;
+}
+.bg-sc {
+  background: #8ac926;
+}
+.bg-my {
+  background: #37123c;
+}
+.bg-sp {
+  background: #fb5012;
+}
+.bg-ge {
+  background: #0a369d;
+}
+.bg-hi {
+  background: #e9df00;
+}
+.bg-po {
+  background: #363537;
+}
+.bg-ce {
+  background: #730071;
+}
+.bg-al {
+  background: #093824;
+}
+.bg-ve {
+  background: #f21b3f;
+}
+.wtext {
+  color: #fff;
 }

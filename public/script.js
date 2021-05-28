@@ -161,15 +161,42 @@ const getQuestions = async () => {
     //Create help menu
     helpButton.addEventListener('click', () => {
         const helpMenu = document.createElement('div')
-        helpMenu.classList.add('position-absolute', 'top-10', 'w-100', 'h-100')
-        helpMenu.style.backgroundColor = '#fff'
-        helpMenu.style.height = window.screen.height
-        helpMenu.style.width = window.screen.width
-        helpMenu.style.color = '#000'
+        helpMenu.classList.add('position-absolute', 'top-10', 'w-100', 'h-100', 'bg-dark')
+        helpMenu.style.height = '100%'
+        helpMenu.style.width = '100%'
+        helpMenu.style.color = '#fff'
+        //Create exit button
         const exitButton = document.createElement('button')
         exitButton.textContent = 'X'
-        exitButton.classList.add('btn', 'btn-dark', 'mt-2', 'position-absolute', 'right-0')
+        exitButton.classList.add('btn', 'btn-dark', 'mt-2', 'p-2', 'ml-10')
         helpMenu.appendChild(exitButton)
+        exitButton.addEventListener('click', () => {
+            helpMenu.style.display = 'none'
+        })
+        //Create menu elements
+        const gameInfo = document.createElement('div')
+        gameInfo.classList.add('d-flex', 'flex-column', 'align-items-center', 'justify-content-center', 'w-100')
+        gameInfo.innerHTML = `
+        <div>
+        <p class="text-center position-absolute top-0 fs-6 fw-bold text-decoration-underline">How To Play<span class="fs-3">?</span></p>
+        <p class="text-center text-capitalize">answer questions and get points<br>each question has 4 possible answers</p>
+        <hr>
+        <p class="text-capitalize text-center">each question has a category<br><span class=" fw-bold text-decoration-underline">possible categories are</span></p>
+        <ul class="list-group w-100">
+        <li class="text-center list-group-item bg-gkn wtext"><i class="far fa-lightbulb"></i> General Knowledge</li>
+        <li class="text-center list-group-item bg-en wtext"><i class="fas fa-tv"></i> Entertainment</li>
+        <li class="text-center list-group-item bg-sc wtext"><i class="fas fa-flask"></i> Science</li>
+        <li class="text-center list-group-item bg-my wtext"><i class="fas fa-scroll"></i> Mythology</li>
+        <li class="text-center list-group-item bg-sp wtext"><i class="fas fa-football-ball"></i> Sports</li>
+        <li class="text-center list-group-item bg-ge wtext"><i class="fas fa-globe-americas"></i> Geography</li>
+        <li class="text-center list-group-item bg-po wtext"><i class="fas fa-balance-scale"></i> Politics</li>
+        <li class="text-center list-group-item bg-ce wtext"><i class="fas fa-user"></i> Celebrities</li>
+        <li class="text-center list-group-item bg-al wtext"><i class="fas fa-paw"></i> Animals</li>
+        <li class="text-center list-group-item bg-ve wtext"><i class="fas fa-car"></i> Vehicles</li>
+        </ul>
+        </div>
+        `
+        helpMenu.appendChild(gameInfo)
         questionContainer.appendChild(helpMenu)
     })
 
