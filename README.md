@@ -19,6 +19,6 @@
 - [x] Add boosters
   - [x] Bomb
   - [x] Skip
+- [x] Finish help menu
 - [ ] Add animations when click/correcting/failing
-- [ ] Finish help menu
 - [x] Deploy
