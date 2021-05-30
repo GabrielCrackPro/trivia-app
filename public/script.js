@@ -161,14 +161,14 @@ const getQuestions = async () => {
     //Create help menu
     helpButton.addEventListener('click', () => {
         const helpMenu = document.createElement('div')
-        helpMenu.classList.add('position-absolute', 'top-10', 'w-100', 'h-100', 'bg-dark')
-        helpMenu.style.height = '100%'
-        helpMenu.style.width = '100%'
+        helpMenu.classList.add('position-absolute', 'top-2', 'w-100', 'h-100', 'bg-dark')
+        helpMenu.style.height = '100vh'
+        helpMenu.style.width = '100vw'
         helpMenu.style.color = '#fff'
         //Create exit button
         const exitButton = document.createElement('button')
         exitButton.textContent = 'X'
-        exitButton.classList.add('btn', 'btn-dark', 'mt-2', 'p-2', 'ml-10')
+        exitButton.classList.add('btn', 'black', 'mt-2', 'p-2', 'ml-10', 'wtext')
         helpMenu.appendChild(exitButton)
         exitButton.addEventListener('click', () => {
             helpMenu.style.display = 'none'
@@ -179,21 +179,35 @@ const getQuestions = async () => {
         gameInfo.innerHTML = `
         <div>
         <p class="text-center position-absolute top-0 fs-6 fw-bold text-decoration-underline">How To Play<span class="fs-3">?</span></p>
-        <p class="text-center text-capitalize">answer questions and get points<br>each question has 4 possible answers</p>
+        <p class="text-center"><span class="fw-bold text-decoration-underline">Answer questions and get points</span><br>Each question has 4 possible answers</p>
         <hr>
-        <p class="text-capitalize text-center">each question has a category<br><span class=" fw-bold text-decoration-underline">possible categories are</span></p>
-        <ul class="list-group w-100">
-        <li class="text-center list-group-item bg-gkn wtext"><i class="far fa-lightbulb"></i> General Knowledge</li>
-        <li class="text-center list-group-item bg-en wtext"><i class="fas fa-tv"></i> Entertainment</li>
-        <li class="text-center list-group-item bg-sc wtext"><i class="fas fa-flask"></i> Science</li>
-        <li class="text-center list-group-item bg-my wtext"><i class="fas fa-scroll"></i> Mythology</li>
-        <li class="text-center list-group-item bg-sp wtext"><i class="fas fa-football-ball"></i> Sports</li>
-        <li class="text-center list-group-item bg-ge wtext"><i class="fas fa-globe-americas"></i> Geography</li>
-        <li class="text-center list-group-item bg-po wtext"><i class="fas fa-balance-scale"></i> Politics</li>
-        <li class="text-center list-group-item bg-ce wtext"><i class="fas fa-user"></i> Celebrities</li>
-        <li class="text-center list-group-item bg-al wtext"><i class="fas fa-paw"></i> Animals</li>
-        <li class="text-center list-group-item bg-ve wtext"><i class="fas fa-car"></i> Vehicles</li>
+        <p class="text-center">Each question has a category<br><span class=" fw-bold text-decoration-underline">Possible categories</span></p>
+        <ul class="list-group full">
+        <li class="text-center list-group-item bg-gkn wtext p-1"><i class="far fa-lightbulb"></i> General Knowledge</li>
+        <li class="text-center list-group-item bg-en wtext p-1"><i class="fas fa-tv"></i> Entertainment</li>
+        <li class="text-center list-group-item bg-sc wtext p-1"><i class="fas fa-flask"></i> Science</li>
+        <li class="text-center list-group-item bg-my wtext p-1"><i class="fas fa-scroll"></i> Mythology</li>
+        <li class="text-center list-group-item bg-sp wtext p-1"><i class="fas fa-football-ball"></i> Sports</li>
+        <li class="text-center list-group-item bg-ge wtext p-1"><i class="fas fa-globe-americas"></i> Geography</li>
+        <li class="text-center list-group-item bg-po wtext p-1"><i class="fas fa-balance-scale"></i> Politics</li>
+        <li class="text-center list-group-item bg-ce wtext p-1"><i class="fas fa-user"></i> Celebrities</li>
+        <li class="text-center list-group-item bg-al wtext p-1"><i class="fas fa-paw"></i> Animals</li>
+        <li class="text-center list-group-item bg-ve wtext p-1"><i class="fas fa-car"></i> Vehicles</li>
         </ul>
+        <p class="text-center">The points can be used to activate the boosters<br><span class="fw-bold text-decoration-underline">Available boosters</span></p>
+        <ul class="list-group full">
+        <li class="list-group-item black wtext mb-2 text-center"><i class="fas fa-bomb"></i> Bomb - Eliminates one or more incorrect answers <span class="fw-bold text-decoration-underline">Cost 2 points</span></li>
+        <li class="list-group-item black wtext text-center"><i class="fas fa-forward"></i> Skip - Skips a question <span class="fw-bold text-decoration-underline">Cost 1 point</span></li>
+        </ul>
+        <div id="contact">
+        <p class="text-center text-decoration-underline">About / Contact</p>
+        <p class="text-center">All question are from <a href="https://opentdb.com" class="link-light fw-bold">this API</a></p>
+        <div class="btn-group d-flex" role="group">
+        <button type="button" class="btn wtext twitter" onclick="window.open('http://www.twitter.com/gabrielvr001')"><i class="fab fa-twitter fs-4"></i></button>
+        <button type="button" class="btn wtext github" onclick="window.open('http://www.github.com/GabrielCrackPro')"><i class="fab fa-github fs-4"></i></button>
+        <button type="button" class="btn wtext mail" onclick="mailto:gabrielcrackpro2001@gmail.com"><i class="fas fa-envelope fs-4"></i></button>
+        </div>
+        </div>
         </div>
         `
         helpMenu.appendChild(gameInfo)

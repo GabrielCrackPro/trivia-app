@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: sans-serif;
+  overflow-x: hidden;
   font-size: 20px;
 }
 img {
@@ -46,4 +47,25 @@ img {
 }
 .wtext {
   color: #fff;
+}
+.full {
+  width: 90vw;
+}
+.black {
+  background: rgb(26, 25, 25);
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+  transition: all 0.3s ease;
+}
+.twitter,
+.twitter:hover {
+  color: #1da1f2;
+}
+.mail,
+.mail:hover {
+  color: #3e65cf;
 }
